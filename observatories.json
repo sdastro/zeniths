@@ -1,0 +1,14 @@
+{
+  "keck-1": {
+    "latitude": 19.8263,
+    "longitude": -155.4744,
+    "elevation": 4145,
+    "timezone": "Pacific/Honolulu"
+  },
+  "Siding Spring": {
+    "latitude": -31.2749,
+    "longitude": 149.0669,
+    "elevation": 1165,
+    "timezone": "Australia/Sydney"
+  }
+}
