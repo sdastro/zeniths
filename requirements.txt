@@ -1,0 +1,7 @@
+astropy
+numpy
+pandas
+matplotlib
+pulp
+highspy
+tzdata
