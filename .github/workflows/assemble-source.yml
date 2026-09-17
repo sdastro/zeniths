@@ -1,0 +1,37 @@
+name: Assemble ZENITHS source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.zeniths_build/**'
+      - '.github/workflows/assemble-source.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Assemble zeniths.py
+        shell: bash
+        run: |
+          cat .zeniths_build/part_* | base64 -d | gzip -d > zeniths.py
+          python -m py_compile zeniths.py
+
+      - name: Commit assembled source
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zeniths.py
+          if git diff --cached --quiet; then
+            echo "zeniths.py is already up to date."
+            exit 0
+          fi
+          git commit -m "Add ZENITHS scheduler"
+          git push
